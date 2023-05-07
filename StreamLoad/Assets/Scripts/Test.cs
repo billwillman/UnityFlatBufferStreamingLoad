@@ -4,6 +4,7 @@ using UnityEngine;
 using LitJson;
 using System.IO;
 using Google.FlatBuffers;
+using Google.Protobuf;
 using Config;
 
 /*
@@ -40,6 +41,10 @@ public class Test : MonoBehaviour
         else
             m_DataBuffer.ResetReadOnly(stream);
         return m_DataBuffer;
+    }
+
+    void LoadConfigIdMap() {
+        IdMap.Parser.l
     }
 
     private void OnGUI() {
