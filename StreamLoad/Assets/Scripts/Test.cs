@@ -16,8 +16,15 @@ using Config;
  * ProtoBuf Map类型：
  * https://blog.csdn.net/qq23001186/article/details/125748720
  */
+public class IDMap
+{
+    public int dataFileOffset;
+    public Dictionary<string, int> items;
 
-using IDMap = System.Collections.Generic.Dictionary<string, int>;
+    public IDMap() {
+        items = new Dictionary<string, int>();
+    }
+}
 
 public class Test : MonoBehaviour
 {
@@ -36,12 +43,12 @@ public class Test : MonoBehaviour
     /// </summary>
     /// <param name="stream">外部传Stream</param>
     /// <returns></returns>
-    ByteBuffer GetByteBuffer(Stream stream) {
+    ByteBuffer GetByteBuffer(Stream stream, int offset = 0) {
         // ByteBuffer构造函数的position,就支持把几个大配置内容flatbuffer二进制格式合并成一个大文件
         if (m_DataBuffer == null)
-            m_DataBuffer = new ByteBuffer(new StreamReadBuffer(stream));
+            m_DataBuffer = new ByteBuffer(new StreamReadBuffer(stream), offset);
         else
-            m_DataBuffer.ResetReadOnly(stream);
+            m_DataBuffer.ResetReadOnly(stream, offset);
         return m_DataBuffer;
     }
 
@@ -114,15 +121,16 @@ public class Test : MonoBehaviour
         for (int i = 0; i < cfg.ItemsLength; ++i) {
             var monster = cfg.Items(i);
             if (monster != null && monster.HasValue) {
-                if (idMap == null)
+                if (idMap == null) {
                     idMap = new IDMap();
+                }
 
-                idMap.TryAdd(monster.Value.Id.ToString(), i);
+                idMap.items.TryAdd(monster.Value.Id.ToString(), i);
             }
         }
 
         string json = string.Empty;
-        if (idMap != null && idMap.Count > 0) {
+        if (idMap != null && idMap.items.Count > 0) {
             json = JsonMapper.ToJson(idMap);
         }
 
@@ -140,7 +148,8 @@ public class Test : MonoBehaviour
         m_CfgKeyToIndexMap = null;
         LoadJsonIdMap();
         IdMap protoMsg = new IdMap();
-        var iter = m_CfgKeyToIndexMap.GetEnumerator();
+        protoMsg.DataFileOffset = m_CfgKeyToIndexMap.dataFileOffset;
+        var iter = m_CfgKeyToIndexMap.items.GetEnumerator();
         try {
             while (iter.MoveNext()) {
                 protoMsg.IdToIdxMap.Add(uint.Parse(iter.Current.Key), iter.Current.Value);
@@ -187,7 +196,7 @@ public class Test : MonoBehaviour
         var idMap = LoadIndexMap();
         FileStream stream = new FileStream("Assets/Resources/MonsterCfg_flatbuffer.bytes", FileMode.Open, FileAccess.Read);
         try {
-            var byteBuffer = GetByteBuffer(stream);
+            var byteBuffer = GetByteBuffer(stream, idMap.DataFileOffset);
             MonsterCfg cfg = MonsterCfg.GetRootAsMonsterCfg(byteBuffer);
             var iter = idMap.IdToIdxMap.GetEnumerator();
             try {

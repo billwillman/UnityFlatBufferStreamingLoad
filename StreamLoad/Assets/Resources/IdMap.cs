@@ -22,13 +22,14 @@ public static partial class IdMapReflection {
   static IdMapReflection() {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
-          "CgtJZE1hcC5wcm90byJmCgVJZE1hcBIqCgppZFRvSWR4TWFwGAEgAygLMhYu",
-          "SWRNYXAuSWRUb0lkeE1hcEVudHJ5GjEKD0lkVG9JZHhNYXBFbnRyeRILCgNr",
-          "ZXkYASABKA0SDQoFdmFsdWUYAiABKAU6AjgBYgZwcm90bzM="));
+          "CgtJZE1hcC5wcm90byJ+CgVJZE1hcBIWCg5kYXRhRmlsZU9mZnNldBgBIAEo",
+          "BRIqCgppZFRvSWR4TWFwGAIgAygLMhYuSWRNYXAuSWRUb0lkeE1hcEVudHJ5",
+          "GjEKD0lkVG9JZHhNYXBFbnRyeRILCgNrZXkYASABKA0SDQoFdmFsdWUYAiAB",
+          "KAU6AjgBYgZwcm90bzM="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::IdMap), global::IdMap.Parser, new[]{ "IdToIdxMap" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, })
+          new pbr::GeneratedClrTypeInfo(typeof(global::IdMap), global::IdMap.Parser, new[]{ "DataFileOffset", "IdToIdxMap" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, })
         }));
   }
   #endregion
@@ -60,6 +61,7 @@ public sealed partial class IdMap : pb::IMessage<IdMap> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public IdMap(IdMap other) : this() {
+    dataFileOffset_ = other.dataFileOffset_;
     idToIdxMap_ = other.idToIdxMap_.Clone();
     _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
   }
@@ -69,10 +71,21 @@ public sealed partial class IdMap : pb::IMessage<IdMap> {
     return new IdMap(this);
   }
 
+  /// <summary>Field number for the "dataFileOffset" field.</summary>
+  public const int DataFileOffsetFieldNumber = 1;
+  private int dataFileOffset_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public int DataFileOffset {
+    get { return dataFileOffset_; }
+    set {
+      dataFileOffset_ = value;
+    }
+  }
+
   /// <summary>Field number for the "idToIdxMap" field.</summary>
-  public const int IdToIdxMapFieldNumber = 1;
+  public const int IdToIdxMapFieldNumber = 2;
   private static readonly pbc::MapField<uint, int>.Codec _map_idToIdxMap_codec
-      = new pbc::MapField<uint, int>.Codec(pb::FieldCodec.ForUInt32(8), pb::FieldCodec.ForInt32(16), 10);
+      = new pbc::MapField<uint, int>.Codec(pb::FieldCodec.ForUInt32(8), pb::FieldCodec.ForInt32(16), 18);
   private readonly pbc::MapField<uint, int> idToIdxMap_ = new pbc::MapField<uint, int>();
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public pbc::MapField<uint, int> IdToIdxMap {
@@ -92,6 +105,7 @@ public sealed partial class IdMap : pb::IMessage<IdMap> {
     if (ReferenceEquals(other, this)) {
       return true;
     }
+    if (DataFileOffset != other.DataFileOffset) return false;
     if (!IdToIdxMap.Equals(other.IdToIdxMap)) return false;
     return Equals(_unknownFields, other._unknownFields);
   }
@@ -99,6 +113,7 @@ public sealed partial class IdMap : pb::IMessage<IdMap> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override int GetHashCode() {
     int hash = 1;
+    if (DataFileOffset != 0) hash ^= DataFileOffset.GetHashCode();
     hash ^= IdToIdxMap.GetHashCode();
     if (_unknownFields != null) {
       hash ^= _unknownFields.GetHashCode();
@@ -113,6 +128,10 @@ public sealed partial class IdMap : pb::IMessage<IdMap> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public void WriteTo(pb::CodedOutputStream output) {
+    if (DataFileOffset != 0) {
+      output.WriteRawTag(8);
+      output.WriteInt32(DataFileOffset);
+    }
     idToIdxMap_.WriteTo(output, _map_idToIdxMap_codec);
     if (_unknownFields != null) {
       _unknownFields.WriteTo(output);
@@ -122,6 +141,9 @@ public sealed partial class IdMap : pb::IMessage<IdMap> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public int CalculateSize() {
     int size = 0;
+    if (DataFileOffset != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeInt32Size(DataFileOffset);
+    }
     size += idToIdxMap_.CalculateSize(_map_idToIdxMap_codec);
     if (_unknownFields != null) {
       size += _unknownFields.CalculateSize();
@@ -133,6 +155,9 @@ public sealed partial class IdMap : pb::IMessage<IdMap> {
   public void MergeFrom(IdMap other) {
     if (other == null) {
       return;
+    }
+    if (other.DataFileOffset != 0) {
+      DataFileOffset = other.DataFileOffset;
     }
     idToIdxMap_.Add(other.idToIdxMap_);
     _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -146,7 +171,11 @@ public sealed partial class IdMap : pb::IMessage<IdMap> {
         default:
           _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
           break;
-        case 10: {
+        case 8: {
+          DataFileOffset = input.ReadInt32();
+          break;
+        }
+        case 18: {
           idToIdxMap_.AddEntriesFrom(input, _map_idToIdxMap_codec);
           break;
         }

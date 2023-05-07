@@ -44,7 +44,7 @@ public class TestEditor: Editor
             m_DataStream.Dispose();
         }
         m_DataStream = new FileStream("Assets/Resources/MonsterCfg_flatbuffer.bytes", FileMode.Open, FileAccess.Read);
-        var byteBuffer = new ByteBuffer(new StreamReadBuffer(m_DataStream));
+        var byteBuffer = new ByteBuffer(new StreamReadBuffer(m_DataStream), m_IndexFile.DataFileOffset);
         m_MonsterCfg = MonsterCfg.GetRootAsMonsterCfg(byteBuffer);
         m_IsDataLoad = true;
     }
