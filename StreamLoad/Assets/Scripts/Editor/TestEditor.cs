@@ -34,6 +34,7 @@ public class TestEditor: Editor
         }
         m_IsDataLoad = false;
         m_IndexFile = null;
+        m_MonsterCfg.__init(0, null);
     }
 
     void LoadDataStream() {
