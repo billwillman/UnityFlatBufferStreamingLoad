@@ -7,6 +7,6 @@ del /f %~dp0MonsterCfg.bin
 
 echo "build idMap proto"
 cd %~dp0StreamLoad/Assets/Resources/
-protoc --csharp_out=./ IdMap.proto
+%~dp0protoc --csharp_out=./ IdMap.proto
 
 pause

@@ -154,7 +154,8 @@ public class Test : MonoBehaviour
         stream.Dispose();
 
         // ÷¥––√¸¡Ó––
-        RunCmd("../dataBuild.bat");
+        string cmd = Path.GetFullPath("../dataBuild.bat").Replace("\\", "/");
+        RunCmd(cmd);
         //
         UnityEditor.EditorApplication.isPlaying = false;
         UnityEditor.AssetDatabase.Refresh();
