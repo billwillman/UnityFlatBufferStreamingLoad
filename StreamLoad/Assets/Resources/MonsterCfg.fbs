@@ -1,0 +1,14 @@
+namespace Config;
+
+table Monster
+{
+	id: int;
+	name: string;
+}
+
+table MonsterCfg
+{
+	items: [Monster];
+}
+
+root_type MonsterCfg;
