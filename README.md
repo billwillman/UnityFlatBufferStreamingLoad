@@ -12,5 +12,5 @@ https://github.com/billwillman/NsTcpClient.git
 通过FileStream流式搜索实时读取Demo:
 ![image](https://user-images.githubusercontent.com/3533457/236686954-b7e7f8e2-970b-4b61-ab55-9d4ed9e93dd8.png)
 
-N个策划大配置可以采用合并成一个index file(proto Encode)和一个data file(flatbuffer Encode)
+N个策划大配置可以采用N个index file(proto Encode，items里是key和index,另外一个大文件的偏移，打包全部进ab内)和合并一个data file(flatbuffer Encode，不走AB)
 
