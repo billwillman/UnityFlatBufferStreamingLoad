@@ -1,0 +1,40 @@
+namespace Config;
+
+table Monster
+{
+	id: int;
+	pid: int;
+	name: string;
+	markname_forexcelonly: string;
+	title: string;
+    model: int;
+	stand: int;
+    icon: int;
+    mapid: int;
+    x: int;
+    y: int;
+    direct: int;
+    turn: int;
+    npctalk: string;
+    isprivate: int;
+    bubble: string;
+    radius: int;
+    isnotvisible: int;
+    isclick: byte;
+    isdynamicnpc: byte;
+    type: int;
+    dynamicpara: int;
+    job: int;
+    script: string;
+    function: string;
+    time: int;
+    scale: float;
+    firstload: int;
+}
+
+table MonsterCfg
+{
+	items: [Monster];
+}
+
+root_type MonsterCfg;

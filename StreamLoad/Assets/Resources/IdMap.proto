@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+message IdMap
+{
+	int32 dataFileOffset = 1;
+	map<uint32, int32> idToIdxMap = 2;
+}
