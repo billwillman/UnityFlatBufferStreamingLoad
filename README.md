@@ -4,7 +4,7 @@
 https://github.com/billwillman/flatbuffers
 byteBuffer.cs 中: StreamReadBuffer ByteBuffer
 
-ByteBuffer构造函数的position,就支持把几个大配置内容flatbuffer二进制格式合并成一个大文件
+ByteBuffer构造函数的position,就支持把几个大配置内容flatbuffer二进制格式合并成一个大文件。还可以考虑结合weakreference等减少运行时持续内存占用
 
 protobuf的支持：
 https://github.com/billwillman/NsTcpClient.git
