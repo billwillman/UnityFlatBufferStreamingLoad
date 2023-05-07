@@ -12,7 +12,12 @@ using Config;
  * https://blog.csdn.net/qq_32482645/article/details/126285684
  */
 
-using IDMap = System.Collections.Generic.Dictionary<string, int>;
+/*
+ * ProtoBuf Map类型：
+ * https://blog.csdn.net/qq23001186/article/details/125748720
+ */
+
+using IDMap = System.Collections.Generic.Dictionary<string, uint>;
 
 public class Test : MonoBehaviour
 {
@@ -25,17 +30,19 @@ public class Test : MonoBehaviour
     }
 
     void LoadJsonIdMap() {
+        if (m_CfgKeyToIndexMap != null)
+            return;
         var textids = Resources.Load<TextAsset>("MonsterCfg_Id");
         m_CfgKeyToIndexMap = JsonMapper.ToObject<IDMap>(textids.text);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// 可以复用ByteBuffer, 支持多个Stream只用一个ByteBuffer，具体去看flatbuffer的C#源代码
+    /// </summary>
+    /// <param name="stream">外部传Stream</param>
+    /// <returns></returns>
     ByteBuffer GetByteBuffer(Stream stream) {
+        // ByteBuffer构造函数的position,就支持把几个大配置内容flatbuffer二进制格式合并成一个大文件
         if (m_DataBuffer == null)
             m_DataBuffer = new ByteBuffer(new StreamReadBuffer(stream));
         else
@@ -44,8 +51,28 @@ public class Test : MonoBehaviour
     }
 
     void LoadConfigIdMap() {
-        IdMap.Parser.l
+       //IdMap.Parser.l
     }
+
+#if UNITY_EDITOR
+    void BuildConfigIdMapFile() {
+        LoadJsonIdMap();
+        IdMap protoMsg = new IdMap();
+        var iter = m_CfgKeyToIndexMap.GetEnumerator();
+        try {
+            while (iter.MoveNext()) {
+                protoMsg.IdToIdxMap.Add(uint.Parse(iter.Current.Key), iter.Current.Value);
+            }
+        } finally {
+            iter.Dispose();
+        }
+        var buffer = protoMsg.ToByteArray();
+        FileStream stream = new FileStream("Assets/Resources/MonsterCfg_Id.bytes", FileMode.Create, FileAccess.Write);
+        stream.Write(buffer);
+        stream.Dispose();
+    }
+#endif
+
 
     private void OnGUI() {
         if (GUI.Button(new Rect(100, 100, 200, 100), "Streaming加载")) {
@@ -62,5 +89,12 @@ public class Test : MonoBehaviour
             }
           //  Debug.Log(cfg.ToString());
         }
+
+#if UNITY_EDITOR
+        if (GUI.Button(new Rect(100, 100 + 100 + 10, 200, 100), "生成proto idmap")) {
+            BuildConfigIdMapFile();
+        }
+#endif
+
     }
 }

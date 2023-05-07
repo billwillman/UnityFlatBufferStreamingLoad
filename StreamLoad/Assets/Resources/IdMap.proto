@@ -2,5 +2,5 @@ syntax = "proto3";
 
 message IdMap
 {
-	map<string, uint32> idToIdxMap = 1;
+	map<uint32, uint32> idToIdxMap = 1;
 }
