@@ -47,6 +47,67 @@ public class Test : MonoBehaviour
 
 #if UNITY_EDITOR
 
+    public static void RunCmd(string command) {
+
+        if (string.IsNullOrEmpty(command))
+            return;
+#if UNITY_EDITOR_WIN
+        command = " /c " + command;
+        processCommand("cmd.exe", command);
+#elif UNITY_EDITOR_OSX
+		processCommand(command, string.Empty);
+#endif
+    }
+
+    private static void processCommand(string command, string argument) {
+        System.Diagnostics.ProcessStartInfo start = new System.Diagnostics.ProcessStartInfo(command);
+        start.Arguments = argument;
+        start.CreateNoWindow = false;
+        start.ErrorDialog = true;
+        start.UseShellExecute = true;
+        //	start.UseShellExecute = false;
+
+        if (start.UseShellExecute) {
+            start.RedirectStandardOutput = false;
+            start.RedirectStandardError = false;
+            start.RedirectStandardInput = false;
+        } else {
+            start.RedirectStandardOutput = true;
+            start.RedirectStandardError = true;
+            start.RedirectStandardInput = true;
+            //	start.StandardOutputEncoding = System.Text.UTF8Encoding.UTF8;
+            //	start.StandardErrorEncoding = System.Text.UTF8Encoding.UTF8;
+            start.StandardOutputEncoding = System.Text.Encoding.Default;
+            start.StandardErrorEncoding = System.Text.Encoding.Default;
+        }
+
+        System.Diagnostics.Process p = System.Diagnostics.Process.Start(start);
+
+        if (!start.UseShellExecute) {
+            Exec_Print(p.StandardOutput, false);
+            Exec_Print(p.StandardError, true);
+        }
+
+        p.WaitForExit();
+        p.Close();
+    }
+
+    private static void Exec_Print(StreamReader reader, bool isError) {
+        if (reader == null)
+            return;
+
+        string str = reader.ReadToEnd();
+
+        if (!string.IsNullOrEmpty(str)) {
+            if (isError)
+                Debug.LogError(str);
+            else
+                Debug.Log(str);
+        }
+
+        reader.Close();
+    }
+
     void BuildIndexMapJson() {
         var cfg = LoadAllMonsterCfg();
         IDMap idMap = null;
@@ -91,6 +152,12 @@ public class Test : MonoBehaviour
         FileStream stream = new FileStream("Assets/Resources/MonsterCfg_Id_proto.bytes", FileMode.Create, FileAccess.Write);
         stream.Write(buffer);
         stream.Dispose();
+
+        // ÷¥––√¸¡Ó––
+        RunCmd("../dataBuild.bat");
+        //
+        UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.AssetDatabase.Refresh();
     }
 #endif
 
