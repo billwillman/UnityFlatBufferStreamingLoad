@@ -20,26 +20,166 @@ public struct Monster : IFlatbufferObject
   public Monster __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
   public int Id { get { int o = __p.__offset(4); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
-  public string Name { get { int o = __p.__offset(6); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+  public int Pid { get { int o = __p.__offset(6); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public string Name { get { int o = __p.__offset(8); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
 #if ENABLE_SPAN_T
-  public Span<byte> GetNameBytes() { return __p.__vector_as_span<byte>(6, 1); }
+  public Span<byte> GetNameBytes() { return __p.__vector_as_span<byte>(8, 1); }
 #else
-  public ArraySegment<byte>? GetNameBytes() { return __p.__vector_as_arraysegment(6); }
+  public ArraySegment<byte>? GetNameBytes() { return __p.__vector_as_arraysegment(8); }
 #endif
-  public byte[] GetNameArray() { return __p.__vector_as_array<byte>(6); }
+  public byte[] GetNameArray() { return __p.__vector_as_array<byte>(8); }
+  public string MarknameForexcelonly { get { int o = __p.__offset(10); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetMarknameForexcelonlyBytes() { return __p.__vector_as_span<byte>(10, 1); }
+#else
+  public ArraySegment<byte>? GetMarknameForexcelonlyBytes() { return __p.__vector_as_arraysegment(10); }
+#endif
+  public byte[] GetMarknameForexcelonlyArray() { return __p.__vector_as_array<byte>(10); }
+  public string Title { get { int o = __p.__offset(12); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetTitleBytes() { return __p.__vector_as_span<byte>(12, 1); }
+#else
+  public ArraySegment<byte>? GetTitleBytes() { return __p.__vector_as_arraysegment(12); }
+#endif
+  public byte[] GetTitleArray() { return __p.__vector_as_array<byte>(12); }
+  public int Model { get { int o = __p.__offset(14); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public int Stand { get { int o = __p.__offset(16); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public int Icon { get { int o = __p.__offset(18); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public int Mapid { get { int o = __p.__offset(20); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public int X { get { int o = __p.__offset(22); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public int Y { get { int o = __p.__offset(24); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public int Direct { get { int o = __p.__offset(26); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public int Turn { get { int o = __p.__offset(28); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public string Npctalk { get { int o = __p.__offset(30); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetNpctalkBytes() { return __p.__vector_as_span<byte>(30, 1); }
+#else
+  public ArraySegment<byte>? GetNpctalkBytes() { return __p.__vector_as_arraysegment(30); }
+#endif
+  public byte[] GetNpctalkArray() { return __p.__vector_as_array<byte>(30); }
+  public int Isprivate { get { int o = __p.__offset(32); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public string Bubble { get { int o = __p.__offset(34); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetBubbleBytes() { return __p.__vector_as_span<byte>(34, 1); }
+#else
+  public ArraySegment<byte>? GetBubbleBytes() { return __p.__vector_as_arraysegment(34); }
+#endif
+  public byte[] GetBubbleArray() { return __p.__vector_as_array<byte>(34); }
+  public int Radius { get { int o = __p.__offset(36); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public int Isnotvisible { get { int o = __p.__offset(38); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public sbyte Isclick { get { int o = __p.__offset(40); return o != 0 ? __p.bb.GetSbyte(o + __p.bb_pos) : (sbyte)0; } }
+  public sbyte Isdynamicnpc { get { int o = __p.__offset(42); return o != 0 ? __p.bb.GetSbyte(o + __p.bb_pos) : (sbyte)0; } }
+  public int Type { get { int o = __p.__offset(44); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public int Dynamicpara { get { int o = __p.__offset(46); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public int Job { get { int o = __p.__offset(48); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public string Script { get { int o = __p.__offset(50); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetScriptBytes() { return __p.__vector_as_span<byte>(50, 1); }
+#else
+  public ArraySegment<byte>? GetScriptBytes() { return __p.__vector_as_arraysegment(50); }
+#endif
+  public byte[] GetScriptArray() { return __p.__vector_as_array<byte>(50); }
+  public string Function { get { int o = __p.__offset(52); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetFunctionBytes() { return __p.__vector_as_span<byte>(52, 1); }
+#else
+  public ArraySegment<byte>? GetFunctionBytes() { return __p.__vector_as_arraysegment(52); }
+#endif
+  public byte[] GetFunctionArray() { return __p.__vector_as_array<byte>(52); }
+  public int Time { get { int o = __p.__offset(54); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public float Scale { get { int o = __p.__offset(56); return o != 0 ? __p.bb.GetFloat(o + __p.bb_pos) : (float)0.0f; } }
+  public int Firstload { get { int o = __p.__offset(58); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
 
   public static Offset<Config.Monster> CreateMonster(FlatBufferBuilder builder,
       int id = 0,
-      StringOffset nameOffset = default(StringOffset)) {
-    builder.StartTable(2);
+      int pid = 0,
+      StringOffset nameOffset = default(StringOffset),
+      StringOffset markname_forexcelonlyOffset = default(StringOffset),
+      StringOffset titleOffset = default(StringOffset),
+      int model = 0,
+      int stand = 0,
+      int icon = 0,
+      int mapid = 0,
+      int x = 0,
+      int y = 0,
+      int direct = 0,
+      int turn = 0,
+      StringOffset npctalkOffset = default(StringOffset),
+      int isprivate = 0,
+      StringOffset bubbleOffset = default(StringOffset),
+      int radius = 0,
+      int isnotvisible = 0,
+      sbyte isclick = 0,
+      sbyte isdynamicnpc = 0,
+      int type = 0,
+      int dynamicpara = 0,
+      int job = 0,
+      StringOffset scriptOffset = default(StringOffset),
+      StringOffset functionOffset = default(StringOffset),
+      int time = 0,
+      float scale = 0.0f,
+      int firstload = 0) {
+    builder.StartTable(28);
+    Monster.AddFirstload(builder, firstload);
+    Monster.AddScale(builder, scale);
+    Monster.AddTime(builder, time);
+    Monster.AddFunction(builder, functionOffset);
+    Monster.AddScript(builder, scriptOffset);
+    Monster.AddJob(builder, job);
+    Monster.AddDynamicpara(builder, dynamicpara);
+    Monster.AddType(builder, type);
+    Monster.AddIsnotvisible(builder, isnotvisible);
+    Monster.AddRadius(builder, radius);
+    Monster.AddBubble(builder, bubbleOffset);
+    Monster.AddIsprivate(builder, isprivate);
+    Monster.AddNpctalk(builder, npctalkOffset);
+    Monster.AddTurn(builder, turn);
+    Monster.AddDirect(builder, direct);
+    Monster.AddY(builder, y);
+    Monster.AddX(builder, x);
+    Monster.AddMapid(builder, mapid);
+    Monster.AddIcon(builder, icon);
+    Monster.AddStand(builder, stand);
+    Monster.AddModel(builder, model);
+    Monster.AddTitle(builder, titleOffset);
+    Monster.AddMarknameForexcelonly(builder, markname_forexcelonlyOffset);
     Monster.AddName(builder, nameOffset);
+    Monster.AddPid(builder, pid);
     Monster.AddId(builder, id);
+    Monster.AddIsdynamicnpc(builder, isdynamicnpc);
+    Monster.AddIsclick(builder, isclick);
     return Monster.EndMonster(builder);
   }
 
-  public static void StartMonster(FlatBufferBuilder builder) { builder.StartTable(2); }
+  public static void StartMonster(FlatBufferBuilder builder) { builder.StartTable(28); }
   public static void AddId(FlatBufferBuilder builder, int id) { builder.AddInt(0, id, 0); }
-  public static void AddName(FlatBufferBuilder builder, StringOffset nameOffset) { builder.AddOffset(1, nameOffset.Value, 0); }
+  public static void AddPid(FlatBufferBuilder builder, int pid) { builder.AddInt(1, pid, 0); }
+  public static void AddName(FlatBufferBuilder builder, StringOffset nameOffset) { builder.AddOffset(2, nameOffset.Value, 0); }
+  public static void AddMarknameForexcelonly(FlatBufferBuilder builder, StringOffset marknameForexcelonlyOffset) { builder.AddOffset(3, marknameForexcelonlyOffset.Value, 0); }
+  public static void AddTitle(FlatBufferBuilder builder, StringOffset titleOffset) { builder.AddOffset(4, titleOffset.Value, 0); }
+  public static void AddModel(FlatBufferBuilder builder, int model) { builder.AddInt(5, model, 0); }
+  public static void AddStand(FlatBufferBuilder builder, int stand) { builder.AddInt(6, stand, 0); }
+  public static void AddIcon(FlatBufferBuilder builder, int icon) { builder.AddInt(7, icon, 0); }
+  public static void AddMapid(FlatBufferBuilder builder, int mapid) { builder.AddInt(8, mapid, 0); }
+  public static void AddX(FlatBufferBuilder builder, int x) { builder.AddInt(9, x, 0); }
+  public static void AddY(FlatBufferBuilder builder, int y) { builder.AddInt(10, y, 0); }
+  public static void AddDirect(FlatBufferBuilder builder, int direct) { builder.AddInt(11, direct, 0); }
+  public static void AddTurn(FlatBufferBuilder builder, int turn) { builder.AddInt(12, turn, 0); }
+  public static void AddNpctalk(FlatBufferBuilder builder, StringOffset npctalkOffset) { builder.AddOffset(13, npctalkOffset.Value, 0); }
+  public static void AddIsprivate(FlatBufferBuilder builder, int isprivate) { builder.AddInt(14, isprivate, 0); }
+  public static void AddBubble(FlatBufferBuilder builder, StringOffset bubbleOffset) { builder.AddOffset(15, bubbleOffset.Value, 0); }
+  public static void AddRadius(FlatBufferBuilder builder, int radius) { builder.AddInt(16, radius, 0); }
+  public static void AddIsnotvisible(FlatBufferBuilder builder, int isnotvisible) { builder.AddInt(17, isnotvisible, 0); }
+  public static void AddIsclick(FlatBufferBuilder builder, sbyte isclick) { builder.AddSbyte(18, isclick, 0); }
+  public static void AddIsdynamicnpc(FlatBufferBuilder builder, sbyte isdynamicnpc) { builder.AddSbyte(19, isdynamicnpc, 0); }
+  public static void AddType(FlatBufferBuilder builder, int type) { builder.AddInt(20, type, 0); }
+  public static void AddDynamicpara(FlatBufferBuilder builder, int dynamicpara) { builder.AddInt(21, dynamicpara, 0); }
+  public static void AddJob(FlatBufferBuilder builder, int job) { builder.AddInt(22, job, 0); }
+  public static void AddScript(FlatBufferBuilder builder, StringOffset scriptOffset) { builder.AddOffset(23, scriptOffset.Value, 0); }
+  public static void AddFunction(FlatBufferBuilder builder, StringOffset functionOffset) { builder.AddOffset(24, functionOffset.Value, 0); }
+  public static void AddTime(FlatBufferBuilder builder, int time) { builder.AddInt(25, time, 0); }
+  public static void AddScale(FlatBufferBuilder builder, float scale) { builder.AddFloat(26, scale, 0.0f); }
+  public static void AddFirstload(FlatBufferBuilder builder, int firstload) { builder.AddInt(27, firstload, 0); }
   public static Offset<Config.Monster> EndMonster(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<Config.Monster>(o);
@@ -53,7 +193,33 @@ static public class MonsterVerify
   {
     return verifier.VerifyTableStart(tablePos)
       && verifier.VerifyField(tablePos, 4 /*Id*/, 4 /*int*/, 4, false)
-      && verifier.VerifyString(tablePos, 6 /*Name*/, false)
+      && verifier.VerifyField(tablePos, 6 /*Pid*/, 4 /*int*/, 4, false)
+      && verifier.VerifyString(tablePos, 8 /*Name*/, false)
+      && verifier.VerifyString(tablePos, 10 /*MarknameForexcelonly*/, false)
+      && verifier.VerifyString(tablePos, 12 /*Title*/, false)
+      && verifier.VerifyField(tablePos, 14 /*Model*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 16 /*Stand*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 18 /*Icon*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 20 /*Mapid*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 22 /*X*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 24 /*Y*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 26 /*Direct*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 28 /*Turn*/, 4 /*int*/, 4, false)
+      && verifier.VerifyString(tablePos, 30 /*Npctalk*/, false)
+      && verifier.VerifyField(tablePos, 32 /*Isprivate*/, 4 /*int*/, 4, false)
+      && verifier.VerifyString(tablePos, 34 /*Bubble*/, false)
+      && verifier.VerifyField(tablePos, 36 /*Radius*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 38 /*Isnotvisible*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 40 /*Isclick*/, 1 /*sbyte*/, 1, false)
+      && verifier.VerifyField(tablePos, 42 /*Isdynamicnpc*/, 1 /*sbyte*/, 1, false)
+      && verifier.VerifyField(tablePos, 44 /*Type*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 46 /*Dynamicpara*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 48 /*Job*/, 4 /*int*/, 4, false)
+      && verifier.VerifyString(tablePos, 50 /*Script*/, false)
+      && verifier.VerifyString(tablePos, 52 /*Function*/, false)
+      && verifier.VerifyField(tablePos, 54 /*Time*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 56 /*Scale*/, 4 /*float*/, 4, false)
+      && verifier.VerifyField(tablePos, 58 /*Firstload*/, 4 /*int*/, 4, false)
       && verifier.VerifyTableEnd(tablePos);
   }
 }
