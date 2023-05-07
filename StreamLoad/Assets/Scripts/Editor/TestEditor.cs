@@ -15,6 +15,7 @@ public class TestEditor: Editor
     private static IdMap m_IndexFile = null;
     private static FileStream m_DataStream = null;
     private Monster m_LastSearchMonster;
+    private bool m_IsSearched = false;
 
     protected static bool IsLoaded {
         get {
@@ -34,7 +35,8 @@ public class TestEditor: Editor
         }
         m_IsDataLoad = false;
         m_IndexFile = null;
-        m_MonsterCfg.__init(0, null);
+       // m_MonsterCfg.__init(0, null);
+        m_IsSearched = false;
     }
 
     void LoadDataStream() {
@@ -60,16 +62,19 @@ public class TestEditor: Editor
                         var m = m_MonsterCfg.Items(idx);
                         if (m != null && m.HasValue) {
                             m_LastSearchMonster = m.Value;
+                            m_IsSearched = true;
                             Repaint();
                         }
                     }
                 }
             }
 
-            EditorGUILayout.Space();
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("id", m_LastSearchMonster.Id.ToString());
-            EditorGUILayout.LabelField("name", m_LastSearchMonster.Name);
+            if (m_IsSearched) {
+                EditorGUILayout.Space();
+                EditorGUILayout.Space();
+                EditorGUILayout.LabelField("id", m_LastSearchMonster.Id.ToString());
+                EditorGUILayout.LabelField("name", m_LastSearchMonster.Name);
+            }
 
         } else {
             if (GUILayout.Button("加载索引文件")) {
