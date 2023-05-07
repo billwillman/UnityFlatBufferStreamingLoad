@@ -128,15 +128,21 @@ public class Test : MonoBehaviour
         }
 
 #if UNITY_EDITOR
-        if (GUI.Button(new Rect(100, 100 + 100 + 10, 200, 100), "生成proto idmap")) {
-            BuildConfigIdMapFile();
+        var oldColor = GUI.color;
+        GUI.color = Color.red;
+        try {
+            if (GUI.Button(new Rect(100, 100 + 100 + 10, 200, 100), "生成proto idmap")) {
+                BuildConfigIdMapFile();
+            }
+        } finally {
+            GUI.color = oldColor;
         }
 #endif
         if (GUI.Button(new Rect(100 + 200 + 10, 100 + 100 + 10, 200, 100), "读取proto idmap")) {
             TestConfigIdMap();
         }
 #if UNITY_EDITOR
-        var oldColor = GUI.color;
+        oldColor = GUI.color;
         try {
             GUI.color = Color.green;
             if (GUI.Button(new Rect(100, 200 + 100 + 20, 200, 100), "索引文件流读取数据")) {
