@@ -10,14 +10,14 @@ using Config;
 public class TestEditor: Editor
 {
     private string m_SearchTxt;
-    private static MonsterCfg m_MonsterCfg;
-    private static bool m_IsDataLoad = false;
-    private static IdMap m_IndexFile = null;
-    private static FileStream m_DataStream = null;
+    private MonsterCfg m_MonsterCfg;
+    private bool m_IsDataLoad = false;
+    private IdMap m_IndexFile = null;
+    private FileStream m_DataStream = null;
     private Monster m_LastSearchMonster;
     private bool m_IsSearched = false;
 
-    protected static bool IsLoaded {
+    protected bool IsLoaded {
         get {
             return m_IndexFile != null && m_IsDataLoad && m_DataStream != null;
         }
@@ -35,7 +35,7 @@ public class TestEditor: Editor
         }
         m_IsDataLoad = false;
         m_IndexFile = null;
-       // m_MonsterCfg.__init(0, null);
+        //m_MonsterCfg.__init(0, null);
         m_IsSearched = false;
     }
 
@@ -52,8 +52,13 @@ public class TestEditor: Editor
     override public void OnInspectorGUI() {
         base.DrawDefaultInspector();
 
+        EditorGUILayout.Space();
+       // GUILayout.Window(0, new Rect(0, 0, Screen.width, 2), null, string.Empty);
+        EditorGUILayout.Space();
+
         if (IsLoaded) {
             m_SearchTxt = EditorGUILayout.TextField("ËÑË÷ID", m_SearchTxt);
+            EditorGUILayout.Space();
             if (GUILayout.Button("ËÑË÷")) {
                 uint id;
                 if (uint.TryParse(m_SearchTxt, out id)) {
