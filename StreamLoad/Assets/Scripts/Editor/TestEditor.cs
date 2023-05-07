@@ -73,7 +73,12 @@ public class TestEditor: Editor
                 EditorGUILayout.Space();
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("id", m_LastSearchMonster.Id.ToString());
-                EditorGUILayout.LabelField("name", m_LastSearchMonster.Name);
+                EditorGUILayout.LabelField("姓名", m_LastSearchMonster.Name);
+                EditorGUILayout.LabelField("对话", m_LastSearchMonster.Npctalk);
+                EditorGUILayout.LabelField("地图", string.Format("{0:D}({1:D}:{2:D})", m_LastSearchMonster.Mapid, m_LastSearchMonster.X, m_LastSearchMonster.Y));
+                EditorGUILayout.LabelField("模型编号", m_LastSearchMonster.Model.ToString());
+                EditorGUILayout.LabelField("图标", m_LastSearchMonster.Icon.ToString());
+                EditorGUILayout.LabelField("缩放", m_LastSearchMonster.Scale.ToString());
             }
 
         } else {
