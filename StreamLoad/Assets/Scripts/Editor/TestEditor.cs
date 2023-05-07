@@ -59,7 +59,7 @@ public class TestEditor: Editor
         if (IsLoaded) {
             m_SearchTxt = EditorGUILayout.TextField("ËÑË÷ID", m_SearchTxt);
             EditorGUILayout.Space();
-            if (GUILayout.Button("ËÑË÷")) {
+            if (GUILayout.Button("Á÷Ê½ËÑË÷")) {
                 uint id;
                 if (uint.TryParse(m_SearchTxt, out id)) {
                     int idx;
