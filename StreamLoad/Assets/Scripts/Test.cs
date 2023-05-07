@@ -47,6 +47,7 @@ public class Test : MonoBehaviour
 
 #if UNITY_EDITOR
     void BuildConfigIdMapFile() {
+        m_CfgKeyToIndexMap = null;
         LoadJsonIdMap();
         IdMap protoMsg = new IdMap();
         var iter = m_CfgKeyToIndexMap.GetEnumerator();
