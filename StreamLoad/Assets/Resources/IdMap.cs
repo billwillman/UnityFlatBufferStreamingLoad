@@ -24,7 +24,7 @@ public static partial class IdMapReflection {
         string.Concat(
           "CgtJZE1hcC5wcm90byJmCgVJZE1hcBIqCgppZFRvSWR4TWFwGAEgAygLMhYu",
           "SWRNYXAuSWRUb0lkeE1hcEVudHJ5GjEKD0lkVG9JZHhNYXBFbnRyeRILCgNr",
-          "ZXkYASABKA0SDQoFdmFsdWUYAiABKA06AjgBYgZwcm90bzM="));
+          "ZXkYASABKA0SDQoFdmFsdWUYAiABKAU6AjgBYgZwcm90bzM="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -71,11 +71,11 @@ public sealed partial class IdMap : pb::IMessage<IdMap> {
 
   /// <summary>Field number for the "idToIdxMap" field.</summary>
   public const int IdToIdxMapFieldNumber = 1;
-  private static readonly pbc::MapField<uint, uint>.Codec _map_idToIdxMap_codec
-      = new pbc::MapField<uint, uint>.Codec(pb::FieldCodec.ForUInt32(8), pb::FieldCodec.ForUInt32(16), 10);
-  private readonly pbc::MapField<uint, uint> idToIdxMap_ = new pbc::MapField<uint, uint>();
+  private static readonly pbc::MapField<uint, int>.Codec _map_idToIdxMap_codec
+      = new pbc::MapField<uint, int>.Codec(pb::FieldCodec.ForUInt32(8), pb::FieldCodec.ForInt32(16), 10);
+  private readonly pbc::MapField<uint, int> idToIdxMap_ = new pbc::MapField<uint, int>();
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public pbc::MapField<uint, uint> IdToIdxMap {
+  public pbc::MapField<uint, int> IdToIdxMap {
     get { return idToIdxMap_; }
   }
 

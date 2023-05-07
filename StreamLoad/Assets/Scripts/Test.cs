@@ -17,17 +17,12 @@ using Config;
  * https://blog.csdn.net/qq23001186/article/details/125748720
  */
 
-using IDMap = System.Collections.Generic.Dictionary<string, uint>;
+using IDMap = System.Collections.Generic.Dictionary<string, int>;
 
 public class Test : MonoBehaviour
 {
     private IDMap m_CfgKeyToIndexMap = null;
     private ByteBuffer m_DataBuffer = null;
-    // Start is called before the first frame update
-    void Start()
-    {
-        LoadJsonIdMap();
-    }
 
     void LoadJsonIdMap() {
         if (m_CfgKeyToIndexMap != null)
@@ -50,10 +45,6 @@ public class Test : MonoBehaviour
         return m_DataBuffer;
     }
 
-    void LoadConfigIdMap() {
-       //IdMap.Parser.l
-    }
-
 #if UNITY_EDITOR
     void BuildConfigIdMapFile() {
         LoadJsonIdMap();
@@ -67,16 +58,62 @@ public class Test : MonoBehaviour
             iter.Dispose();
         }
         var buffer = protoMsg.ToByteArray();
-        FileStream stream = new FileStream("Assets/Resources/MonsterCfg_Id.bytes", FileMode.Create, FileAccess.Write);
+        FileStream stream = new FileStream("Assets/Resources/MonsterCfg_Id_proto.bytes", FileMode.Create, FileAccess.Write);
         stream.Write(buffer);
         stream.Dispose();
     }
 #endif
 
+    IdMap LoadIndexMap() {
+        var text = Resources.Load<TextAsset>("MonsterCfg_Id_proto");
+        var idMap = IdMap.Parser.ParseFrom(text.bytes);
+        return idMap;
+    }
+
+    void TestConfigIdMap() {
+        var idMap = LoadIndexMap();
+        if (idMap.IdToIdxMap.Count > 0) {
+            var iter = idMap.IdToIdxMap.GetEnumerator();
+            try {
+                while (iter.MoveNext()) {
+                    Debug.LogFormat("id: {0:D} dataIndex: {1:D}", iter.Current.Key, iter.Current.Value);
+                }
+            } finally {
+                iter.Dispose();
+            }
+        }
+    }
+
+#if UNITY_EDITOR
+    void TestIndexFileData() {
+        var idMap = LoadIndexMap();
+        FileStream stream = new FileStream("Assets/Resources/MonsterCfg_flatbuffer.bytes", FileMode.Open, FileAccess.Read);
+        try {
+            var byteBuffer = GetByteBuffer(stream);
+            MonsterCfg cfg = MonsterCfg.GetRootAsMonsterCfg(byteBuffer);
+            var iter = idMap.IdToIdxMap.GetEnumerator();
+            try {
+                while (iter.MoveNext()) {
+                    var id = iter.Current.Key;
+                    var index = iter.Current.Value;
+                    var data = cfg.Items(index);
+                    if (data != null && data.HasValue) {
+                        Debug.LogFormat("[Monster] id: {0:D} name: {1:D}", data.Value.Id, data.Value.Name);
+                    }
+                }
+            } finally {
+                iter.Dispose();
+            }
+        } finally {
+            stream.Dispose();
+        }
+    }
+#endif
 
     private void OnGUI() {
         if (GUI.Button(new Rect(100, 100, 200, 100), "Streaming加载")) {
-            var data = Resources.Load<TextAsset>("MonsterCfg");
+            LoadJsonIdMap();
+            var data = Resources.Load<TextAsset>("MonsterCfg_flatbuffer");
             MemoryStream stream = new MemoryStream(data.bytes);
             var byteBuffer = GetByteBuffer(stream);
             MonsterCfg cfg = MonsterCfg.GetRootAsMonsterCfg(byteBuffer);
@@ -95,6 +132,19 @@ public class Test : MonoBehaviour
             BuildConfigIdMapFile();
         }
 #endif
-
+        if (GUI.Button(new Rect(100 + 200 + 10, 100 + 100 + 10, 200, 100), "读取proto idmap")) {
+            TestConfigIdMap();
+        }
+#if UNITY_EDITOR
+        var oldColor = GUI.color;
+        try {
+            GUI.color = Color.green;
+            if (GUI.Button(new Rect(100, 200 + 100 + 20, 200, 100), "索引文件流读取数据")) {
+                TestIndexFileData();
+            }
+        } finally {
+            GUI.color = oldColor;
+        }
+#endif
     }
 }
