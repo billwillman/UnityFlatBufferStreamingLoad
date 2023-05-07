@@ -46,7 +46,36 @@ public class Test : MonoBehaviour
     }
 
 #if UNITY_EDITOR
+
+    void BuildIndexMapJson() {
+        var cfg = LoadAllMonsterCfg();
+        IDMap idMap = null;
+        for (int i = 0; i < cfg.ItemsLength; ++i) {
+            var monster = cfg.Items(i);
+            if (monster != null && monster.HasValue) {
+                if (idMap == null)
+                    idMap = new IDMap();
+
+                idMap.TryAdd(monster.Value.Id.ToString(), i);
+            }
+        }
+
+        string json = string.Empty;
+        if (idMap != null && idMap.Count > 0) {
+            json = JsonMapper.ToJson(idMap);
+        }
+
+        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(json);
+        FileStream stream = new FileStream("Assets/Resources/MonsterCfg_Id.json", FileMode.Create, FileAccess.Write);
+        try {
+            stream.Write(buffer);
+        } finally {
+            stream.Dispose();
+        }
+    }
+
     void BuildConfigIdMapFile() {
+        BuildIndexMapJson();
         m_CfgKeyToIndexMap = null;
         LoadJsonIdMap();
         IdMap protoMsg = new IdMap();
@@ -111,13 +140,18 @@ public class Test : MonoBehaviour
     }
 #endif
 
+    MonsterCfg LoadAllMonsterCfg() {
+        var data = Resources.Load<TextAsset>("MonsterCfg_flatbuffer");
+        MemoryStream stream = new MemoryStream(data.bytes);
+        var byteBuffer = GetByteBuffer(stream);
+        MonsterCfg cfg = MonsterCfg.GetRootAsMonsterCfg(byteBuffer);
+        return cfg;
+    }
+
     private void OnGUI() {
         if (GUI.Button(new Rect(100, 100, 200, 100), "Streamingº”‘ÿ")) {
             LoadJsonIdMap();
-            var data = Resources.Load<TextAsset>("MonsterCfg_flatbuffer");
-            MemoryStream stream = new MemoryStream(data.bytes);
-            var byteBuffer = GetByteBuffer(stream);
-            MonsterCfg cfg = MonsterCfg.GetRootAsMonsterCfg(byteBuffer);
+            var cfg = LoadAllMonsterCfg();
             int length = cfg.ItemsLength;
             for (int i = 0; i < length; ++i) {
                 var monster = cfg.Items(i);
