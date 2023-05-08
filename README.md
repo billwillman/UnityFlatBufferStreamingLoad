@@ -9,7 +9,7 @@ ByteBuffer构造函数的position,就支持把几个大配置内容flatbuffer二
 FlatBuffer存储内存结构讲解：
 https://gitee.com/ReallyT-bag/study_notes/blob/master/protocol/flatbuffer%E7%BC%96%E7%A0%81%E7%BB%93%E6%9E%84.md
 
-protobuf的支持：
+protobuf的支持(做了缓存池，减少了分配GC)：
 https://github.com/billwillman/NsTcpClient.git
 
 通过FileStream流式搜索实时读取Demo:
