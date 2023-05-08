@@ -12,10 +12,8 @@ https://gitee.com/ReallyT-bag/study_notes/blob/master/protocol/flatbuffer%E7%BC%
 protobuf的支持：
 https://github.com/billwillman/NsTcpClient.git
 
-$\color{red}{
-可以考虑找比较新的版本，使用pb的c# 无gc版本具体参考：
+##可以考虑找比较新的版本，使用pb的c# 无gc版本具体参考：
 https://www.cnblogs.com/egmkang/p/14171962.html
-红色字}$
 
 通过FileStream流式搜索实时读取Demo:
 
