@@ -6,6 +6,9 @@ byteBuffer.cs 中: StreamReadBuffer ByteBuffer（注意这个flatbuffers库是�
 
 ByteBuffer构造函数的position,就支持把几个大配置内容flatbuffer二进制格式合并成一个大文件。还可以考虑结合weakreference等减少运行时持续内存占用
 
+FlatBuffer存储内存结构讲解：
+https://gitee.com/ReallyT-bag/study_notes/blob/master/protocol/flatbuffer%E7%BC%96%E7%A0%81%E7%BB%93%E6%9E%84.md
+
 protobuf的支持：
 https://github.com/billwillman/NsTcpClient.git
 
