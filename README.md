@@ -10,7 +10,7 @@ FlatBuffer存储内存结构讲解：
 https://gitee.com/ReallyT-bag/study_notes/blob/master/protocol/flatbuffer%E7%BC%96%E7%A0%81%E7%BB%93%E6%9E%84.md
 
 protobuf的支持：
-https://github.com/billwillman/NsTcpClient.git
+~https://github.com/billwillman/NsTcpClient.git~
 
 ## 可以考虑找比较新的版本，使用pb的c# 优化gc版本具体参考(已经改为22.4版本的protobuf，工程里用的是.net stard2.0版本，其他.net framework的版本在根目录protobuffer下)：
 https://www.cnblogs.com/egmkang/p/14171962.html
