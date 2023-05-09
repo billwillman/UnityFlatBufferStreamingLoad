@@ -12,7 +12,7 @@ https://gitee.com/ReallyT-bag/study_notes/blob/master/protocol/flatbuffer%E7%BC%
 ~protobuf的支持：
 https://github.com/billwillman/NsTcpClient.git~
 
-## 可以考虑找比较新的版本，使用pb的c# 优化gc版本具体参考(已经改为22.4版本的protobuf，工程里用的是.net stard2.0版本，其他.net framework的版本在根目录protobuffer下, old_proto是老版本3.5不建议使用)：
+## 可以考虑找比较新的版本，使用pb的c# 优化gc版本具体参考(已经改为22.4版本的protobuf，工程里用的是.net stard2.0版本，其他.net framework的版本在根目录protobuffer下, old_proto是老版本支持.netframework 3.5，如果用新版本Unity就不建议使用)：
 https://www.cnblogs.com/egmkang/p/14171962.html
 
 ## 通过FileStream流式搜索实时读取Demo:
