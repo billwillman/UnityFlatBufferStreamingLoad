@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Editor\TestEditor.cs" />
+    <Compile Include="Assets\Scripts\Editor\BuildData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
