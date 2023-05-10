@@ -115,6 +115,39 @@ public class Test : MonoBehaviour
         reader.Close();
     }
 
+    IDMap BuildWhitelistCfgMapJson() {
+        var data = Resources.Load<TextAsset>("whitelistcfg_flatbuffer");
+        MemoryStream stream = new MemoryStream(data.bytes);
+        var byteBuffer = GetByteBuffer(stream);
+        WhiteListCfg cfg = WhiteListCfg.GetRootAsWhiteListCfg(byteBuffer);
+        IDMap idMap = null;
+        for (int i = 0; i < cfg.ItemsLength; ++i) {
+            var monster = cfg.Items(i);
+            if (monster != null && monster.HasValue) {
+                if (idMap == null) {
+                    idMap = new IDMap();
+                }
+
+                idMap.items.TryAdd(monster.Value.Index.ToString(), i);
+            }
+        }
+
+        string json = string.Empty;
+        if (idMap != null && idMap.items.Count > 0) {
+            json = JsonMapper.ToJson(idMap);
+        }
+
+        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(json);
+        FileStream fStream = new FileStream("Assets/Resources/whitelistcfg_Id.json", FileMode.Create, FileAccess.Write);
+        try {
+            fStream.Write(buffer);
+        } finally {
+            fStream.Dispose();
+        }
+
+        return idMap;
+    }
+
     IDMap BuildMonsterCfgIndexMapJson() {
         var cfg = LoadAllMonsterCfg();
         IDMap idMap = null;
@@ -145,10 +178,7 @@ public class Test : MonoBehaviour
         return idMap;
     }
 
-    void BuildMonsterConfigIdMapFile() {
-        var idFileMap = BuildMonsterCfgIndexMapJson();
-        //m_CfgKeyToIndexMap = null;
-        //LoadJsonIdMap();
+    void SaveIndexProtoFile(string name, IDMap idFileMap) {
         IdMap protoMsg = new IdMap();
         protoMsg.DataFileOffset = idFileMap.dataFileOffset;
         var iter = idFileMap.items.GetEnumerator();
@@ -160,9 +190,21 @@ public class Test : MonoBehaviour
             iter.Dispose();
         }
         var buffer = protoMsg.ToByteArray();
-        FileStream stream = new FileStream("Assets/Resources/MonsterCfg_Id_proto.bytes", FileMode.Create, FileAccess.Write);
+        FileStream stream = new FileStream(string.Format("Assets/Resources/{0}_Id_proto.bytes", name), FileMode.Create, FileAccess.Write);
         stream.Write(buffer);
         stream.Dispose();
+    }
+
+    void BuildMonsterConfigIdMapFile() {
+        var idFileMap = BuildMonsterCfgIndexMapJson();
+        //m_CfgKeyToIndexMap = null;
+        //LoadJsonIdMap();
+        SaveIndexProtoFile("MonsterCfg", idFileMap);
+    }
+
+    void BuildWhiteListCfgIdMapFile() {
+        var idFileMap = BuildWhitelistCfgMapJson();
+        SaveIndexProtoFile("whitelistcfg", idFileMap);
     }
 
     void BuildWhilteListCfgMapFile() {
@@ -171,6 +213,8 @@ public class Test : MonoBehaviour
 
     void BuildConfigIdMapFile() {
         BuildMonsterConfigIdMapFile();
+
+        BuildWhiteListCfgIdMapFile();
 
         // ÷¥––√¸¡Ó––
         string cmd = Path.GetFullPath("../dataBuild.bat").Replace("\\", "/");
