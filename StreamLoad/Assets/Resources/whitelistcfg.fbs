@@ -1,0 +1,19 @@
+namespace Config;
+
+table WhiteItem
+{
+	index: int;
+    pid: int;
+    groupid: int;
+    type: int;
+    itemid: int;
+    currencytype: int;
+    bottomprice: int;
+}
+
+table WhiteListCfg
+{
+	items: [WhiteItem];
+}
+
+root_type WhiteListCfg;
