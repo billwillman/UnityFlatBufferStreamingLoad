@@ -115,7 +115,7 @@ public class Test : MonoBehaviour
         reader.Close();
     }
 
-    IDMap BuildIndexMapJson() {
+    IDMap BuildMonsterCfgIndexMapJson() {
         var cfg = LoadAllMonsterCfg();
         IDMap idMap = null;
         for (int i = 0; i < cfg.ItemsLength; ++i) {
@@ -146,7 +146,7 @@ public class Test : MonoBehaviour
     }
 
     void BuildMonsterConfigIdMapFile() {
-        var idFileMap = BuildIndexMapJson();
+        var idFileMap = BuildMonsterCfgIndexMapJson();
         //m_CfgKeyToIndexMap = null;
         //LoadJsonIdMap();
         IdMap protoMsg = new IdMap();
@@ -163,6 +163,10 @@ public class Test : MonoBehaviour
         FileStream stream = new FileStream("Assets/Resources/MonsterCfg_Id_proto.bytes", FileMode.Create, FileAccess.Write);
         stream.Write(buffer);
         stream.Dispose();
+    }
+
+    void BuildWhilteListCfgMapFile() {
+
     }
 
     void BuildConfigIdMapFile() {
