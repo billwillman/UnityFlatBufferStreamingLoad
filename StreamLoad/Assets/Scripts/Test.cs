@@ -115,7 +115,7 @@ public class Test : MonoBehaviour
         reader.Close();
     }
 
-    void BuildIndexMapJson() {
+    IDMap BuildIndexMapJson() {
         var cfg = LoadAllMonsterCfg();
         IDMap idMap = null;
         for (int i = 0; i < cfg.ItemsLength; ++i) {
@@ -141,15 +141,17 @@ public class Test : MonoBehaviour
         } finally {
             stream.Dispose();
         }
+
+        return idMap;
     }
 
-    void BuildConfigIdMapFile() {
-        BuildIndexMapJson();
-        m_CfgKeyToIndexMap = null;
-        LoadJsonIdMap();
+    void BuildMonsterConfigIdMapFile() {
+        var idFileMap = BuildIndexMapJson();
+        //m_CfgKeyToIndexMap = null;
+        //LoadJsonIdMap();
         IdMap protoMsg = new IdMap();
-        protoMsg.DataFileOffset = m_CfgKeyToIndexMap.dataFileOffset;
-        var iter = m_CfgKeyToIndexMap.items.GetEnumerator();
+        protoMsg.DataFileOffset = idFileMap.dataFileOffset;
+        var iter = idFileMap.items.GetEnumerator();
         try {
             while (iter.MoveNext()) {
                 protoMsg.IdToIdxMap.Add(uint.Parse(iter.Current.Key), iter.Current.Value);
@@ -161,6 +163,10 @@ public class Test : MonoBehaviour
         FileStream stream = new FileStream("Assets/Resources/MonsterCfg_Id_proto.bytes", FileMode.Create, FileAccess.Write);
         stream.Write(buffer);
         stream.Dispose();
+    }
+
+    void BuildConfigIdMapFile() {
+        BuildMonsterConfigIdMapFile();
 
         // Ö´ÐÐÃüÁîÐÐ
         string cmd = Path.GetFullPath("../dataBuild.bat").Replace("\\", "/");
