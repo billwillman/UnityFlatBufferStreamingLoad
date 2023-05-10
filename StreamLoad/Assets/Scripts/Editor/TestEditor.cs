@@ -80,7 +80,7 @@ public class CfgRender<T, V> where T: IFlatbufferObject where V: IFlatbufferObje
             }
 
         } else {
-            if (GUILayout.Button("加载索引文件")) {
+            if (GUILayout.Button("加载" + cfgName)) {
                 LoadIndexFile(cfgName);
                 LoadDataStream(cfgName, GetRootAsMonsterCfg);
             }
