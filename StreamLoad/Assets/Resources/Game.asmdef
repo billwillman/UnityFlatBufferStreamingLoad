@@ -1,6 +1,6 @@
 {
     "name": "Game",
-    "rootNamespace": "Config;Game",
+    "rootNamespace": "Game",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

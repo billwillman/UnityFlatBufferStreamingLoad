@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Config {
+namespace Game.Config {
 
   /// <summary>Holder for reflection information generated from IdMap.proto</summary>
   public static partial class IdMapReflection {
@@ -24,14 +24,14 @@ namespace Config {
     static IdMapReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgtJZE1hcC5wcm90bxIGQ29uZmlnIoUBCgVJZE1hcBIWCg5kYXRhRmlsZU9m",
-            "ZnNldBgBIAEoBRIxCgppZFRvSWR4TWFwGAIgAygLMh0uQ29uZmlnLklkTWFw",
-            "LklkVG9JZHhNYXBFbnRyeRoxCg9JZFRvSWR4TWFwRW50cnkSCwoDa2V5GAEg",
-            "ASgNEg0KBXZhbHVlGAIgASgFOgI4AWIGcHJvdG8z"));
+            "CgtJZE1hcC5wcm90bxILR2FtZS5Db25maWciigEKBUlkTWFwEhYKDmRhdGFG",
+            "aWxlT2Zmc2V0GAEgASgFEjYKCmlkVG9JZHhNYXAYAiADKAsyIi5HYW1lLkNv",
+            "bmZpZy5JZE1hcC5JZFRvSWR4TWFwRW50cnkaMQoPSWRUb0lkeE1hcEVudHJ5",
+            "EgsKA2tleRgBIAEoDRINCgV2YWx1ZRgCIAEoBToCOAFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Config.IdMap), global::Config.IdMap.Parser, new[]{ "DataFileOffset", "IdToIdxMap" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, })
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.Config.IdMap), global::Game.Config.IdMap.Parser, new[]{ "DataFileOffset", "IdToIdxMap" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, })
           }));
     }
     #endregion
@@ -46,7 +46,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.IdMapReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Game.Config.IdMapReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

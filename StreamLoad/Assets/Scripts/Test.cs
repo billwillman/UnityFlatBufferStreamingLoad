@@ -5,7 +5,7 @@ using LitJson;
 using System.IO;
 using Google.FlatBuffers;
 using Google.Protobuf;
-using Config;
+using Game.Config;
 
 /*
  * Json to flatbuffer

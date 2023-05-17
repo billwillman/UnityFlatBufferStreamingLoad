@@ -1,4 +1,4 @@
-namespace Config;
+namespace Game.Config;
 
 table WhiteItem
 {

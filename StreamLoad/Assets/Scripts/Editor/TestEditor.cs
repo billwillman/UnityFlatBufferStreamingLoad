@@ -5,7 +5,7 @@ using System.IO;
 using Google.FlatBuffers;
 using UnityEditor;
 using UnityEngine;
-using Config;
+using Game.Config;
 using Game;
 
 public class CfgRender<T, V> where T: IFlatbufferObject where V: IFlatbufferObject
